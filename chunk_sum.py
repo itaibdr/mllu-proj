@@ -42,9 +42,9 @@ for j in tqdm(range(len(all_inputs[0:10]))):
       sums.append(tokenizer.batch_decode(summary_ids, skip_special_tokens=True, clean_up_tokenization_spaces=True)[0])
       print(ids[i].shape)
     else:
-      app = tokenizer.batch_decode(ids[i-1], skip_special_tokens=True, clean_up_tokenization_spaces=True)[0]
-      ap = app.split('. ')
-      apt = tokenizer(ap[-1],return_tensors ='pt').to(device)
+      last_sum = tokenizer.batch_decode(ids[i-1], skip_special_tokens=True, clean_up_tokenization_spaces=True)[0]
+      last_sum = last_sum.split('. ')
+      apt = tokenizer(last_sum[-1],return_tensors ='pt').to(device)
       summary_ids = model.generate(torch.concat((apt['input_ids'],inputs[i]["input_ids"]),1), num_beams=2, max_length=128)
       ids.append(summary_ids)
       sums.append(tokenizer.batch_decode(summary_ids, skip_special_tokens=True, clean_up_tokenization_spaces=True)[0])
