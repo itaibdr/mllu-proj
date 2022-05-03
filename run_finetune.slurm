@@ -16,7 +16,7 @@
 singularity exec --nv --bind /scratch/ibd214 --overlay /scratch/ibd214/overlay-25GB-500K.ext3:ro /scratch/ibd214/cuda11.4.2-cudnn8.2.4-devel-ubuntu20.04.3.sif /bin/bash -c "
 source /ext3/env.sh
 conda activate
-cd /scratch/ibd214
+cd /scratch/ibd214/project
 python3 LRQA/run_lrqa.py \
     --model_name_or_path roberta-base \
     --model_mode mc \
